@@ -60,7 +60,7 @@ function dumpStackInSlot(slot)
   local stack = x.getStackInSlot(dump_side, slot)
   local sort_slot = getSlot(stack.label)
   if sort_slot == 0 then
-    break
+    return
   end
   local max_size = x.getSlotMaxStackSize(sort_side, sort_slot)
   local current_size = x.getSlotStackSize(sort_side, sort_slot)
