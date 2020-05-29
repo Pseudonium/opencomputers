@@ -67,7 +67,7 @@ function dumpStackInSlot(slot)
 end
 
 function firstEmptySlot()
-  --Determines the first empty slot in the dump chest
+  --Determine the first empty slot in the dump chest
   local size = x.getInventorySize(dump_side)
   for i=1,size,1 do
     local y = x.getStackInSlot(dump_side, i)
@@ -77,6 +77,23 @@ function firstEmptySlot()
   end
   return 0
 end
+
+function retrieve(label, amount)
+  --Attempt to retrieve that amount of item from the system
+  sort_slot = getSlot(label)
+  if sort_slot ~= 0 then
+    while amount > 64 do
+      empty = firstEmptySlot()
+      x.transferItem(sort_side, dump_side, 64, sort_slot, empty)
+      amount = amount - 64
+    end
+    empty = firstEmptySlot()
+    x.transferItem(sort_side, dump_side, amount, sort_slot, empty)
+  else
+    print("Item not in system.")
+  end
+end
+
 
 create_database()
 
