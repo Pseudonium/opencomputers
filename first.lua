@@ -71,7 +71,7 @@ function firstEmptySlot()
   local size = x.getInventorySize(dump_side)
   for i=1,size,1 do
     local y = x.getStackInSlot(dump_side, i)
-    if type(y) != "table" then
+    if type(y) ~= "table" then
       return i
     end
   end
