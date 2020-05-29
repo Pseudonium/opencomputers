@@ -4,10 +4,13 @@ local sides = require("sides")
 local x = component.transposer
 local db = {}
 
+local dump_side = sides.top
+local sort_side = sides.south
+
 function seeAll()
-  local size = x.getInventorySize(sides.south)
+  local size = x.getInventorySize(sort_side)
   for i=1,size,1 do
-    local y = x.getStackInSlot(sides.south, i)
+    local y = x.getStackInSlot(sort_side, i)
     if type(y) == "table" then
       print(string.format("%-30s %-20s (%s)", y.name, y.label, y.size))
     end
@@ -15,9 +18,9 @@ function seeAll()
 end
 
 function create_database()
-  local size = x.getInventorySize(sides.south)
+  local size = x.getInventorySize(sort_side)
   for i=1,size,1 do
-    local y = x.getStackInSlot(sides.south, i)
+    local y = x.getStackInSlot(sort_side, i)
     if type(y) == "table" then
       local entry = {}
       entry.name = y.name
@@ -37,13 +40,13 @@ function getSlot(label)
 end
 
 function dump()
-  local size = x.getInventorySize(sides.top)
+  local size = x.getInventorySize(dump_side)
   for i=1,size,1 do
-    local y = x.getStackInSlot(sides.top, i)
+    local y = x.getStackInSlot(dump_side, i)
     if type(y) == "table" then
       slot = getSlot(y.label)
       if slot ~= 0 then
-        x.transferItem(sides.top, sides.south, y.size, i, slot)
+        x.transferItem(dump_side, sort_side, y.size, i, slot)
       end
     else
       break
