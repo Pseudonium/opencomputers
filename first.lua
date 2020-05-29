@@ -84,7 +84,7 @@ function retrieve(label, amount)
   if sort_slot ~= 0 then
     local empty = 0
     local available = db[label].size
-    if amount > available then print("Warning! You have requested more than in the system, sending all available instead.") end
+    if amount > available then print("Warning! You have requested more than in the system, sending all available %s instead.", label) end
     while amount > 64 do
       empty = firstEmptySlot()
       x.transferItem(sort_side, dump_side, 64, sort_slot, empty)
@@ -93,7 +93,7 @@ function retrieve(label, amount)
     empty = firstEmptySlot()
     x.transferItem(sort_side, dump_side, amount, sort_slot, empty)
   else
-    print("Item not in system.")
+    print("Item %s not in system.", label)
   end
 end
 
