@@ -101,5 +101,3 @@ end
 create_database()
 
 seeAll()
-
-dump()
