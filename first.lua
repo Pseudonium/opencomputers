@@ -1,5 +1,6 @@
 local component = require("component")
 local sides = require("sides")
+local event = require("event")
 
 local x = component.transposer
 local db = {}
@@ -101,3 +102,5 @@ end
 create_database()
 
 seeAll()
+
+event.listen("touch", dump)
