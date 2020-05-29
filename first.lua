@@ -61,12 +61,9 @@ function dumpStackInSlot(slot)
   local sort_slot = getSlot(stack.label)
   if sort_slot == 0 then
     return
+  else
+    x.transferItem(dump_side, sort_side, stack.size, slot, sort_slot)
   end
-  local max_size = x.getSlotMaxStackSize(sort_side, sort_slot)
-  local current_size = x.getSlotStackSize(sort_side, sort_slot)
-  local remaining = max_size - current_size
-  local transfer_count = math.min(stack.size, remaining)
-  x.transferItem(dump_side, sort_side, transfer_count, slot, sort_slot)
 end
 
 create_database()
