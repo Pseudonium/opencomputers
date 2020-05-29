@@ -44,14 +44,24 @@ function dump()
   for i=1,size,1 do
     local y = x.getStackInSlot(dump_side, i)
     if type(y) == "table" then
-      slot = getSlot(y.label)
-      if slot ~= 0 then
-        x.transferItem(dump_side, sort_side, y.size, i, slot)
-      end
+      dumpStackInSlot(i)
     else
       break
     end
   end
+end
+
+function dumpStackInSlot(slot)
+    local stack = x.getStackInSlot(dump_side, slot)
+    local sort_slot = getSlot(stack.label)
+    if sort_slot == 0 then
+        break
+    end
+    local max_size = x.getSlotMaxStackSize(sort_side, sort_slot)
+    local current_size = x.getSlotStackSize(sort_side, sort_slot)
+    local remaining = max_size - current_size
+    local transfer_count = math.min(stack.size, remaining)
+    x.transferItem(dump_side, sort_side, transfer_count, slot, sort_slot)
 end
 
 create_database()
