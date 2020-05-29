@@ -66,6 +66,18 @@ function dumpStackInSlot(slot)
   end
 end
 
+function firstEmptySlot()
+  --Determines the first empty slot in the dump chest
+  local size = x.getInventorySize(dump_side)
+  for i=1,size,1 do
+    local y = x.getStackInSlot(dump_side, i)
+    if type(y) != "table" then
+      return i
+    end
+  end
+  return 0
+end
+
 create_database()
 
 seeAll()
