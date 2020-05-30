@@ -29,6 +29,7 @@ function create_database()
       entry.name = y.name
       entry.size = y.size
       entry.slot = i
+      entry.label = y.label
       db[y.label] = entry
     end
   end
@@ -98,6 +99,19 @@ function retrieve(label, amount)
   end
 end
 
+function displayEntry(e)
+  --Prints the entry to the console
+  print(string.format("%-30s %-20s (%s)", e.name, e.label, e.size))
+end
+
+function search(s)
+  --Find all labels that contain s as a substring
+  for label, entry in pairs(db) do
+    if string.find(label, s) then
+      
+    end
+  end
+end
 
 create_database()
 
