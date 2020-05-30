@@ -157,4 +157,7 @@ while run do
   if split_command[1] == "display" then
     seeAll()
   end
+  if split_command[1] == "clear" then
+    term.clear()
+  end
 end
