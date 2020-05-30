@@ -9,6 +9,15 @@ local db = {}
 local dump_side = sides.top
 local sort_side = sides.south
 
+function slice(t, start, stop)
+  --Return a slice of the table, from start to stop (inclusive)
+  result = {}
+  for i=start,stop,1 do
+    table.insert(result, t[i])
+  end
+  return result
+end
+
 function seeAll()
   --Return a representation of the sorted inventory
   local size = x.getInventorySize(sort_side)
@@ -127,20 +136,16 @@ while run do
   for word in string.gmatch(command, "%S+") do
     table.insert(split_command, word)
   end
-  arguments = ""
-  for i=2,#split_command,1 do
-    arguments = arguments .. " " .. split_command[i]
+  arguments = slice(split_command, 2, #split_command)
   if split_command[1] == "search" then
-    search(arguments)
+    search_term = table.concat(arguments, " ")
+    search(search_term)
   end
   if split_command[1] == "quit" then
     run = false
   end
   if split_command[1] == "retrieve" then
-    label = ""
-    for i=1,#arguments - 1, 1 do
-      label = label .. " " .. arguments[i]
-    end
+    label = table.concat(slice(arguments, 1, #arguments - 1), " ")
     amount = arguments[#arguments]
     retrieve(label, amount)
   end
