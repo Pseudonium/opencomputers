@@ -1,6 +1,7 @@
 local component = require("component")
 local sides = require("sides")
 local event = require("event")
+local term = require("term")
 
 local x = component.transposer
 local db = {}
@@ -117,4 +118,23 @@ create_database()
 
 seeAll()
 
-event.listen("touch", dump)
+local run = true
+
+term.clear()
+while run do
+  command = io.read()
+  split_command = {}
+  for word in string.gmatch(command, "%S") do
+    table.insert(split_command, word)
+  end
+  if split_command[1] == "search" then
+    search_term = ""
+    for i=2,#split_command,1 do
+      search_term = search_term .. split_command[i]
+    end
+    search(search_term)
+  end
+  if split_command[1] == "quit" then
+    os.exit()
+  end  
+end
