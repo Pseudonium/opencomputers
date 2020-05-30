@@ -146,7 +146,7 @@ while run do
   end
   if split_command[1] == "retrieve" then
     label = table.concat(slice(arguments, 1, #arguments - 1), " ")
-    amount = arguments[#arguments]
+    amount = tonumber(arguments[#arguments])
     retrieve(label, amount)
   end
   if split_command[1] == "dump" then
