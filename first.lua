@@ -108,7 +108,7 @@ function search(s)
   --Find all labels that contain s as a substring
   for label, entry in pairs(db) do
     if string.find(label, s) then
-      
+      displayEntry(entry)
     end
   end
 end
