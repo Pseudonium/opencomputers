@@ -160,4 +160,7 @@ while run do
   if split_command[1] == "clear" then
     term.clear()
   end
+  if split_command[1] == "refresh" then
+    create_database()
+  end
 end
