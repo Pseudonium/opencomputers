@@ -127,18 +127,21 @@ while run do
   for word in string.gmatch(command, "%S+") do
     table.insert(split_command, word)
   end
+  arguments = ""
+  for i=2,#split_command,1 do
+    arguments = arguments .. " " .. split_command[i]
   if split_command[1] == "search" then
-    search_term = ""
-    for i=2,#split_command,1 do
-      search_term = search_term .. split_command[i]
-    end
-    search(search_term)
+    search(arguments)
   end
   if split_command[1] == "quit" then
     run = false
   end
   if split_command[1] == "retrieve" then
-    label, amount = split_command[2], split_command[3]
+    label = ""
+    for i=1,#arguments - 1, 1 do
+      label = label .. " " .. arguments[i]
+    end
+    amount = arguments[#arguments]
     retrieve(label, amount)
   end
   if split_command[1] == "dump" then
