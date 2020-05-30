@@ -124,7 +124,7 @@ term.clear()
 while run do
   command = io.read()
   split_command = {}
-  for word in string.gmatch(command, "%S") do
+  for word in string.gmatch(command, "%S+") do
     table.insert(split_command, word)
   end
   if split_command[1] == "search" then
@@ -135,6 +135,16 @@ while run do
     search(search_term)
   end
   if split_command[1] == "quit" then
-    os.exit()
-  end  
+    run = false
+  end
+  if split_command[1] == "retrieve" then
+    label, amount = split_command[2], split_command[3]
+    retrieve(label, amount)
+  end
+  if split_command[1] == "dump" then
+    dump()
+  end
+  if split_command[1] == "display" then
+    seeAll()
+  end
 end
