@@ -148,9 +148,11 @@ while run do
     label = table.concat(slice(arguments, 1, #arguments - 1), " ")
     amount = tonumber(arguments[#arguments])
     retrieve(label, amount)
+    create_database()
   end
   if split_command[1] == "dump" then
     dump()
+    create_database()
   end
   if split_command[1] == "display" then
     seeAll()
